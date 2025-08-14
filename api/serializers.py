@@ -5,5 +5,7 @@ class AutoSerializers(serializers.ModelSerializer):
     class Meta:
         model = Autor
         fields = '__all__'
+        #Caso se eu quiser colocar campos definidos a sintaxe seria assim:
+        # ['id', 'nome', '...']
         
 
