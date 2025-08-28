@@ -5,9 +5,9 @@ from .serializers import AutoSerializers, EditoraSerializers, LivroSerializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter 
+from rest_framework.permissions import IsAuthenticated # Permissões
+from django_filters.rest_framework import DjangoFilterBackend # Filtros
+from rest_framework.filters import SearchFilter # Filtros
 
 
 
@@ -33,6 +33,11 @@ class AutoresView(ListCreateAPIView): # ListCreateAPIView é o post
     serializer_class = AutoSerializers
     permission_classes = [IsAuthenticated]
     # set é enviar e o get é para pegar
+    # Filtro
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['id']
+    search_fields = ['nome']
+
 
 
 class AutoresDetailView( RetrieveUpdateDestroyAPIView):

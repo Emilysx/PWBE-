@@ -8,6 +8,7 @@ urlpatterns = [
     path('autores/lista',visu_autor ),
     path('editoras', EditorasView.as_view()),
     path('livros', LivrosView.as_view()),
+    path('buscar/', AutoresView.as_view()),
 
     # UPDATE / DELETE
     path('autor/<int:pk>', AutoresDetailView.as_view()),
