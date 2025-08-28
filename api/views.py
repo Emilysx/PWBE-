@@ -2,13 +2,17 @@ from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Autor, Editora, Livro
 from .serializers import AutoSerializers, EditoraSerializers, LivroSerializers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter 
 
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def visu_autor(request):
     if request.method == 'GET':
         queryset = Autor.objects.all()
@@ -27,30 +31,37 @@ def visu_autor(request):
 class AutoresView(ListCreateAPIView): # ListCreateAPIView é o post
     queryset = Autor.objects.all() 
     serializer_class = AutoSerializers
+    permission_classes = [IsAuthenticated]
     # set é enviar e o get é para pegar
 
 
 class AutoresDetailView( RetrieveUpdateDestroyAPIView):
     queryset = Autor.objects.all() 
     serializer_class = AutoSerializers
+    permission_classes = [IsAuthenticated]
 
 ###################### EDITORAS ###########################
 class EditorasView(ListCreateAPIView):
     queryset = Editora.objects.all()
     serializer_class = EditoraSerializers
+    permission_classes = [IsAuthenticated]
 
 class EditorasDetailView( RetrieveUpdateDestroyAPIView):
     queryset = Editora.objects.all()
     serializer_class = EditoraSerializers
+    permission_classes = [IsAuthenticated]
 
 
 ###################### LIVROS ###########################
 class LivrosView(ListCreateAPIView):
     queryset = Livro.objects.all()
     serializer_class = LivroSerializers
+    permission_classes = [IsAuthenticated]
 
 class LivrosDetailView( RetrieveUpdateDestroyAPIView):
     queryset = Livro.objects.all()
     serializer_class = LivroSerializers
+    permission_classes = [IsAuthenticated]
+
 
 
