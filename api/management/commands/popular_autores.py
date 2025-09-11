@@ -39,7 +39,6 @@ class Command(BaseCommand):
                    nome = r.nome, sobrenome = r.sobrenome, data_nasc = r.data_nasc,
                    defaults={"nascion": r.nascion}
                )
-
                criados += int(created)
                atualizados += (not created)
 
