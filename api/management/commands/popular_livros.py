@@ -37,30 +37,34 @@ class Command(BaseCommand):
         df["disponivel"] = df["disponivel"].map({"True": True, "False": False})
         df["dimensoes"] = pd.to_numeric(df["dimensoes"], errors="coerce", downcast="integer")
         df["peso"] = pd.to_numeric(df["peso"], errors="coerce", downcast="integer")
-      
-    # for r in df.itertuples(index=False):
-    # # Pega ou cria o autor
-    # autor_obj, _ = Autor.objects.get_or_create(
-    #     nome=r.autor  # aqui r.autor já vem da coluna do CSV
-    # )
+        
+        # Fiz hoje - 11/09
+        criados = 0
+        for r in df.itertuples(index=False):
+            # Pega ou cria o autor
+            autor_obj, _ = Autor.objects.get_or_create(
+                nome=r.autor  # aqui r.autor já vem da coluna do CSV
+            )
     
-    # # Pega ou cria a editora
-    # editora_obj, _ = Editora.objects.get_or_create(
-    #     nome=r.editora
-    # )
+            # Pega ou cria a editora
+            editora_obj, _ = Editora.objects.get_or_create(
+                nome=r.editora
+            )
+            criados += int(created)
+            self.stdout.write(self.style.SUCCESS(f"Livros criados: {criados}"))
 
         
         # Está eliminando do DataFrame todas as linhas onde nome ou sobrenome estão vazios.
-        df = df.query("nome != '' and sobrenome != '' ")
+        df = df.query("titulo != '' and subtitulo != '' ")
 
         # Está excluindo as colunas que estão em brancos
-        df = df.dropna(subset=['data_nasc'])
+        df = df.dropna(subset=['ano'])
 
         if o['update']:
             criados = atualizados = 0
             for r in df.itertuples(index=False):
-               _, created =  Autor.objects.update_or_create(
-                   nome = r.nome, sobrenome = r.sobrenome, data_nasc = r.data_nasc,
+               _, created =  Livro.objects.update_or_create(
+                   titulo = r.titulo, subtitulo = r.subtitulo, ano = r.ano,
                    defaults={"nascion": r.nascion}
                )
 
@@ -69,11 +73,11 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.SUCCESS(f'Criados: {criados} | Atualizados: {atualizados}'))
         else:
-            objs = [Autor(
-                nome = r.nome, sobrenome = r.sobrenome, data_nasc = r.data_nasc, nascion = r.nascion
+            objs = [Livro(
+                titulo = r.titulo, subtitulo = r.subtitulo, ano = r.ano, nascion = r.nascion
             ) for r in df.itertuples(index=False)]
 
-            Autor.objects.bulk_create(objs, ignore_conflicts=True)
+            Livro.objects.bulk_create(objs, ignore_conflicts=True)
             self.stdout.write(self.style.SUCCESS(f'Criados: {len(objs)}'))
             
 
