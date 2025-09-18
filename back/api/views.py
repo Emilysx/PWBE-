@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated # Permissões
 from django_filters.rest_framework import DjangoFilterBackend # Filtros
 from rest_framework.filters import SearchFilter # Filtros
 
+from .filters import AutoFilter
 
 
 @api_view(['GET', 'POST'])
@@ -31,19 +32,22 @@ def visu_autor(request):
 class AutoresView(ListCreateAPIView): # ListCreateAPIView é o post
     queryset = Autor.objects.all() 
     serializer_class = AutoSerializers
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+
     # set é enviar e o get é para pegar
     # Filtro
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['id']
-    search_fields = ['nome']
+    search_fields = ['nome', 'sobrenome']
+    # filtro
+    filterset_class = AutoFilter
 
 
 
 class AutoresDetailView( RetrieveUpdateDestroyAPIView):
     queryset = Autor.objects.all() 
     serializer_class = AutoSerializers
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 ###################### EDITORAS ###########################
 class EditorasView(ListCreateAPIView):
