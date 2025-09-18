@@ -8,7 +8,7 @@ import { environment } from "../environments/environments";
 @Injectable({providedIn: 'root'})
 export class AutoresService{
     private http = inject(HttpClient)
-    private base = environment.appBase
+    private base = environment.apiBase
 
     listar(): Observable < Autor[]>{
         const url = `${this.base}autores`
