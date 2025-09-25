@@ -10,7 +10,7 @@ export class AutoresService {
   private base = environment.apiBase;
   
   listar(): Observable<Autor[]> {
-    const url = `${this.base}api/autores/`;
+    const url = `${this.base}api/autores`;
     return this.http.get<Autor[]>(url);
   }
 }
