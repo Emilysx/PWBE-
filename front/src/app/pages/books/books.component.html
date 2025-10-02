@@ -1,0 +1,35 @@
+<section style="max-width:900px;margin:2rem auto;padding:0 1rem">
+    <h1>Livros</h1>
+
+    @if (carregando()) {
+    <p>Carregando…</p>
+    } @else if (erro()) {
+    <p style="color:#c62828">{{ erro() }}</p>
+    } @else {
+    <ul style="padding-left:1.25rem">
+        @for (a of livros(); track a.id) {
+        <li style="margin:.25rem 0">
+            <strong>{{ a.titulo }}</strong>
+            @if (a.subtitulo) { — <em style="color:#666">{{ a.subtitulo }}</em> }
+            @if (a.autor) { • {{ a.autor }} }
+            @if (a.editora) { <div style="color:#555">{{ a.editora }}</div> }
+            @if (a.isbn) { <div style="color:#555">{{ a.isbn }}</div> }
+            @if (a.descricao) { <div style="color:#555">{{ a.descricao }}</div> }
+            @if (a.idioma) { <div style="color:#555">{{ a.idioma }}</div> }
+            @if (a.ano) { <div style="color:#555">{{ a.ano }}</div> }
+            @if (a.paginas) { <div style="color:#555">{{ a.paginas }}</div> }
+            @if (a.preco) { <div style="color:#555">{{ a.preco }}</div> }
+            @if (a.estoque) { <div style="color:#555">{{ a.estoque }}</div> }
+            @if (a.desconto) { <div style="color:#555">{{ a.desconto }}</div> }
+            @if (a.disponivel) { <div style="color:#555">{{ a.disponivel }}</div> }
+            @if (a.dimensoes) { <div style="color:#555">{{ a.dimensoes }}</div> }
+            @if (a.peso) { <div style="color:#555">{{ a.peso }}</div> }
+        </li>
+        }
+    </ul>
+    }
+
+    <nav style="margin-top:1rem">
+        <a routerLink="/">Voltar ao início</a>
+    </nav>
+</section>
