@@ -19,12 +19,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // !! - converte para valor booleano, se existe é verdadeiro e se for falso ele fica falso.
   isAuthenticated = () => !!this._access();
 
   token = () => this._access();
 
   login(username: string, password: string): Observable<TokenPair> {
-    const AUTH_URL = `${this.base}/token/`;
+    const AUTH_URL = `${this.base}api/token/`;
     
     
     return this.http.post<TokenPair>(AUTH_URL, { username, password }).pipe(
@@ -37,7 +38,7 @@ export class AuthService {
   }
   
   refresh(): Observable<{ access: string }> {
-    const REFRESH_URL = `${this.base}/refresh/`;
+    const REFRESH_URL = `${this.base}api/refresh/`;
     const refresh = this._refresh();
     return this.http.post<{ access: string }>(REFRESH_URL, { refresh }).pipe(
       tap(t => { this._access.set(t.access); storage.set('access', t.access); })
