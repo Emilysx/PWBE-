@@ -7,7 +7,6 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-login.component',
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
 })
 export class LoginComponent {
   private fb = inject(FormBuilder)

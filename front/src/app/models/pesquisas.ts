@@ -1,0 +1,18 @@
+export interface Pesquisa {
+    id: number,
+    titulo: string,
+    subtitulo?: string | null,
+    autor?: string | null,
+    editora?: string | null,
+    isbn: string,
+    descricao?: string | null,
+    idioma?: string | null,
+    ano: number,
+    paginas: number,
+    preco: number,
+    estoque: number,
+    desconto:number,
+    disponivel: boolean,
+    dimensoes?: string | null,
+    peso: number,
+}
