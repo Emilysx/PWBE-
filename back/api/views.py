@@ -1,26 +1,23 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Autor, Editora, Livro
-from .serializers import AutorSerializers, EditoraSerializers, LivroSerializers
+from .serializers import AutoSerializers, EditoraSerializers, LivroSerializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from .filters import AutoFilter
-from .filters import LivroFilter
+from .filters import AutorFilter, LivroFilter
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def visualizacao_autor(request):
     if request.method == 'GET':
         queryset = Autor.objects.all()
-        serializer = AutorSerializers(queryset, many = True)
+        serializer = AutoSerializers(queryset, many = True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = AutorSerializers(data = request.data)
+        serializer = AutoSerializers(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -30,17 +27,17 @@ def visualizacao_autor(request):
 #################### Autores #############################
 class AutoresView(ListCreateAPIView):
     queryset = Autor.objects.all()
-    serializer_class = AutorSerializers
+    serializer_class = AutoSerializers
     # permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['id']
-    search_fields = ['nome', 'sobrenome']
-    filterset_class = AutoFilter
+    search_fields = ['nome', 'nascion']
+    filterset_class = AutorFilter
     
 
 class AutoresDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Autor.objects.all()
-    serializer_class = AutorSerializers
+    serializer_class = AutoSerializers
     permission_classes = [IsAuthenticated]
 ##########################################################
 
@@ -64,6 +61,7 @@ class LivrosView(ListCreateAPIView):
     filterset_class = LivroFilter
     search_fields = ['titulo', 'autor__nome', 'autor__sobrenome']
     ordering_fields = ['id', 'titulo']
+    ordering = ['titulo']
     
     
 class LivrosDetailView(RetrieveUpdateDestroyAPIView):

@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 urlpatterns = [ 
     # GET / POST
     path('autores', AutoresView.as_view()),
-    path('autores/lista',visu_autor ),
+    path('autores/lista',visualizacao_autor ),
     path('editoras', EditorasView.as_view()),
     path('livros', LivrosView.as_view()),
     path('buscar/', AutoresView.as_view()),

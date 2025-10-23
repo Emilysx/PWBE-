@@ -13,4 +13,9 @@ export class LivrosService {
     const url = `${this.base}api/livros`;
     return this.http.get<Livro[]>(url);
   }
+
+  buscarPorTitulo(titulo: string): Observable<Livro[]> {
+    const url = `${this.base}api/livros?titulo=${encodeURIComponent(titulo)}`;
+    return this.http.get<Livro[]>(url);
+  }
 }

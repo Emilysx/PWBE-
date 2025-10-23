@@ -5,6 +5,7 @@ import { PublisherComponent } from './pages/publisher/publisher.component';
 import { BooksComponent } from './pages/books/books.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from '../auth.guard';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
     {path: '', component: LoginComponent},
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path: 'autores', component: AutoresComponent, canActivate: [authGuard]},
     {path: 'editoras', component: PublisherComponent, canActivate: [authGuard]},
     {path: 'livros', component: BooksComponent, canActivate: [authGuard]},
-    {path: 'pesquisas', component: BooksComponent, canActivate: [authGuard]},
+    { path: 'pesquisas', component: SearchComponent, canActivate: [authGuard] },
+
 ];

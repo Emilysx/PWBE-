@@ -16,3 +16,17 @@ class LivroFilter(df.FilterSet):
     class Meta:
         model = Livro
         fields = []
+
+
+class AutorFilter(df.FilterSet):
+    nome = df.CharFilter(method='filter_nome')
+    nascion = df.CharFilter(field_name='nascion', lookup_expr='iexact')
+
+    def filter_nome(self, ps, name, value: str):
+        if not value:
+            return qs
+        return qs.filter(Q(nome__icontains=value) | Q(nascion__icontains=value))
+
+    class Meta:
+        model = Autor
+        fields = []

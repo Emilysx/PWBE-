@@ -1,0 +1,34 @@
+<div class="search-container">
+  <h2>Buscar Livros</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Digite o título do livro..."
+      [(ngModel)]="titulo"
+      (keyup.enter)="buscarLivros()"
+    />
+    <button (click)="buscarLivros()">Buscar</button>
+  </div>
+
+  <div *ngIf="carregando" class="loading">Carregando...</div>
+
+  <div *ngIf="!carregando && resultados.length > 0" class="results">
+    <h3>Resultados da pesquisa:</h3>
+    <ul>
+      <li *ngFor="let livro of resultados" class="livro-card">
+        <h4>{{ livro.titulo }}</h4>
+        <p *ngIf="livro.subtitulo"><em>{{ livro.subtitulo }}</em></p>
+        <p><strong>Ano:</strong> {{ livro.ano }}</p>
+        <p><strong>Autor:</strong> {{ livro.autor }}</p>
+        <p><strong>Editora:</strong> {{ livro.editora }}</p>
+        <p><strong>Idioma:</strong> {{ livro.idioma }}</p>
+        <p><strong>Preço:</strong> R$ {{ livro.preco }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <p *ngIf="!carregando && resultados.length === 0 && titulo">
+    Nenhum livro encontrado.
+  </p>
+</div>

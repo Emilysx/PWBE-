@@ -9,8 +9,6 @@ type LivroQuery = {
     titulo?: string | null;
     id?: number | string;
     ordering?:  string | null;
-    
-
 }
 
 @Injectable({ providedIn: 'root' })

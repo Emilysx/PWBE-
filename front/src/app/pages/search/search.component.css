@@ -1,0 +1,66 @@
+.search-container {
+  max-width: 700px;
+  margin: 40px auto;
+  text-align: center;
+  background: #f9fafb;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: #2563eb;
+}
+
+button {
+  padding: 10px 18px;
+  margin-left: 10px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
+
+.loading {
+  color: #555;
+  font-style: italic;
+}
+
+.results {
+  text-align: left;
+}
+
+.livro-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.livro-card h4 {
+  margin-bottom: 5px;
+  color: #1d4ed8;
+}
